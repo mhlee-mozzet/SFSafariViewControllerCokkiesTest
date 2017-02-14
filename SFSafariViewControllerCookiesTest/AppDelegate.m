@@ -25,6 +25,10 @@
     
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
+    
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://developer.apple.com"]];
+    NSLog(@"cookies before load: %@", cookies);
+    
     return YES;
 }
 
@@ -68,10 +72,10 @@
 //}
 
 /*! @abstract Delegate callback called when the user taps the Done button. Upon this call, the view controller is dismissed modally. */
-- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://developer.apple.com"]];
-    NSLog(@"cookies: %@", cookies);
-}
+//- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
+//    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://developer.apple.com"]];
+//    NSLog(@"cookies: %@", cookies);
+//}
 
 /*! @abstract Invoked when the initial URL load is complete.
  @param success YES if loading completed successfully, NO if loading failed.
@@ -80,7 +84,7 @@
  */
 - (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://developer.apple.com"]];
-    NSLog(@"cookies: %@", cookies);
+    NSLog(@"cookies after load: %@", cookies);
 }
 
 @end
