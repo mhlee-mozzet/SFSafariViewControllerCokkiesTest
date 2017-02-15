@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import <SafariServices/SafariServices.h>
 
+#define TargetURL   [NSURL URLWithString:@"https://www.facebook.com"]
+
 @interface AppDelegate () <SFSafariViewControllerDelegate>
 
 @end
@@ -20,13 +22,13 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    SFSafariViewController *vc = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:@"https://developer.apple.com"]];
+    SFSafariViewController *vc = [[SFSafariViewController alloc] initWithURL:TargetURL];
     vc.delegate = self;
     
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
     
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://developer.apple.com"]];
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:TargetURL];
     NSLog(@"cookies before load: %@", cookies);
     
     return YES;
@@ -83,7 +85,7 @@
  to its initializer. It is not invoked for any subsequent page loads in the same SFSafariViewController instance.
  */
 - (void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully {
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://developer.apple.com"]];
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:TargetURL];
     NSLog(@"cookies after load: %@", cookies);
 }
 
